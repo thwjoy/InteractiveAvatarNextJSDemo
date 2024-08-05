@@ -11,24 +11,25 @@ export default function App() {
       label: "Demo",
       content: <InteractiveAvatar />,
     },
-    {
-      id: "code",
-      label: "Code",
-      content: <InteractiveAvatarCode />,
-    },
+    // {
+    //   id: "code",
+    //   label: "Code",
+    //   content: <InteractiveAvatarCode />,
+    // },
   ];
 
   return (
     <div className="w-screen h-screen flex flex-col">
       <div className="w-[900px] flex flex-col items-start justify-start gap-5 mx-auto pt-4 pb-20">
         <div className="w-full">
-          <Tabs items={tabs}>
+          {/* <Tabs items={tabs}>
             {(items) => (
-              <Tab key={items.id} title={items.label}>
-                {items.content}
-              </Tab>
+              <Tab key={items.id} title={items.label}> */}
+                {/* {items.content} */}
+              {/* </Tab>
             )}
-          </Tabs>
+          </Tabs> */}
+          <InteractiveAvatar />
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
-import { AVATARS, VOICES } from "@/app/lib/constants";
+import { AVATARS, VOICES, CONTEXTS } from "@/app/lib/constants";
 import {
   Configuration,
+  Json,
   NewSessionData,
   StreamingAvatarApi,
 } from "@heygen/streaming-avatar";
@@ -36,7 +37,9 @@ export default function InteractiveAvatar() {
   const [debug, setDebug] = useState<string>();
   const [avatarId, setAvatarId] = useState<string>("");
   const [voiceId, setVoiceId] = useState<string>("");
+  const [contextId, setContextId] = useState<string>("");
   const [data, setData] = useState<NewSessionData>();
+  const [context, setContext] = useState<Json>();
   const [text, setText] = useState<string>("");
   const [initialized, setInitialized] = useState(false); // Track initialization
   const [recording, setRecording] = useState(false); // Track recording state
@@ -67,7 +70,7 @@ export default function InteractiveAvatar() {
       {
         id: "1",
         role: "system",
-        content: "You are a helpful assistant.",
+        content: context?.meta_prompt,
       },
     ],
   });
@@ -106,6 +109,15 @@ export default function InteractiveAvatar() {
       );
       setData(res);
       setStream(avatar.current.mediaStream);
+      // get the contect here
+      const context = CONTEXTS.find(ctx => ctx.context_id === contextId);
+      // if (context) {
+      //   const metaPrompt = context.meta_prompt;
+      // } else {
+      //   const metaPrompt =  'You are a customer at a resturant';
+      // }
+      // console.log("Context", context.meta_prompt);
+      setContext(context);
     } catch (error) {
       console.error("Error starting avatar session:", error);
       setDebug(
@@ -290,15 +302,15 @@ export default function InteractiveAvatar() {
             <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
               <div className="flex flex-col gap-2 w-full">
                 <p className="text-sm font-medium leading-none">
-                  Custom Avatar ID (optional)
+                  Select an Avatar Profile
                 </p>
-                <Input
-                  value={avatarId}
-                  onChange={(e) => setAvatarId(e.target.value)}
-                  placeholder="Enter a custom avatar ID"
-                />
+                {/* // <Input
+                //   value={avatarId}
+                //   onChange={(e) => setAvatarId(e.target.value)}
+                //   placeholder="Enter a custom avatar ID"
+                // /> */}
                 <Select
-                  placeholder="Or select one from these example avatars"
+                  placeholder="Avatar Profile"
                   size="md"
                   onChange={(e) => {
                     setAvatarId(e.target.value);
@@ -316,15 +328,15 @@ export default function InteractiveAvatar() {
               </div>
               <div className="flex flex-col gap-2 w-full">
                 <p className="text-sm font-medium leading-none">
-                  Custom Voice ID (optional)
+                  Select a Voice Profile
                 </p>
-                <Input
+                {/* <Input
                   value={voiceId}
                   onChange={(e) => setVoiceId(e.target.value)}
                   placeholder="Enter a custom voice ID"
-                />
+                /> */}
                 <Select
-                  placeholder="Or select one from these example voices"
+                  placeholder="Voice Profile"
                   size="md"
                   onChange={(e) => {
                     setVoiceId(e.target.value);
@@ -333,6 +345,29 @@ export default function InteractiveAvatar() {
                   {VOICES.map((voice) => (
                     <SelectItem key={voice.voice_id} textValue={voice.voice_id}>
                       {voice.name} | {voice.language} | {voice.gender}
+                    </SelectItem>
+                  ))}
+                </Select>
+              </div>
+              <div className="flex flex-col gap-2 w-full">
+                <p className="text-sm font-medium leading-none">
+                  Select a Context Profile
+                </p>
+                {/* <Input
+                  value={voiceId}
+                  onChange={(e) => setVoiceId(e.target.value)}
+                  placeholder="Enter a custom voice ID"
+                /> */}
+                <Select
+                  placeholder="Context Profile"
+                  size="md"
+                  onChange={(e) => {
+                    setContextId(e.target.value);
+                  }}
+                >
+                  {CONTEXTS.map((context) => (
+                    <SelectItem key={context.context_id} textValue={context.meta_prompt}>
+                      {context.description}
                     </SelectItem>
                   ))}
                 </Select>
@@ -352,7 +387,7 @@ export default function InteractiveAvatar() {
         </CardBody>
         <Divider />
         <CardFooter className="flex flex-col gap-3">
-          <InteractiveAvatarTextInput
+          {/* <InteractiveAvatarTextInput
             label="Repeat"
             placeholder="Type something for the avatar to repeat"
             input={text}
@@ -360,7 +395,7 @@ export default function InteractiveAvatar() {
             setInput={setText}
             disabled={!stream}
             loading={isLoadingRepeat}
-          />
+          /> */}
           <InteractiveAvatarTextInput
             label="Chat"
             placeholder="Chat with the avatar (uses ChatGPT)"

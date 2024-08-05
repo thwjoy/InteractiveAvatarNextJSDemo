@@ -19,8 +19,8 @@ const fontMono = FontMono({
 
 export const metadata: Metadata = {
   title: {
-    default: "HeyGen Interactive Avatar SDK Demo",
-    template: `%s - HeyGen Interactive Avatar SDK Demo`,
+    default: "Interactive Training Avatar",
+    template: `%s - Interactive Training Avatar`,
   },
   icons: {
     icon: "/heygen-logo.png",
@@ -49,7 +49,7 @@ export default function RootLayout({
       <body className={clsx("min-h-screen bg-background antialiased")}>
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <main className="relative flex flex-col h-screen w-screen">
-            <NavBar />
+            {/* <NavBar /> */}
             {children}
           </main>
         </Providers>

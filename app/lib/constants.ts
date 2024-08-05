@@ -133,3 +133,20 @@ export const VOICES = [
     emotion_support: false,
   },
 ];
+
+export const CONTEXTS = [
+  {
+    context_id: "1",
+    description: "Angry 50yr female on wedding anniversary who recieved cold steak",
+    meta_prompt: "I want you to pretend that you are an angry customer who is female and in their 50s. \
+      You've ordered a steak which has arrived cold and over-done, ruining your wedding aniversary, what are you going to say to me? \
+      ",
+  },
+  {
+    context_id: "2",
+    description: "Young drunk man, who won't leave the resturant",
+    meta_prompt: "I want you to pretend that you are a young man who is drunk and won't leave the resturant. \
+      You've been asked to leave ther resturant and keep singing the Hills are Alive With the Sound of Music. \
+      ",
+  },
+];
