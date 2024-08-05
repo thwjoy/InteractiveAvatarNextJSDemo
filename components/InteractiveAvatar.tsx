@@ -283,7 +283,7 @@ export default function InteractiveAvatar() {
                 <Button
                   size="md"
                   onClick={handleInterrupt}
-                  className="bg-gradient-to-tr from-yellow-500 to-yellow-300 text-white rounded-lg"
+                  className="bg-gradient-to-tr from-grey-500 to-grey-300 text-white rounded-lg"
                   variant="shadow"
                 >
                   Interrupt task
@@ -291,7 +291,7 @@ export default function InteractiveAvatar() {
                 <Button
                   size="md"
                   onClick={endSession}
-                  className="bg-gradient-to-tr from-yellow-500 to-yellow-300  text-white rounded-lg"
+                  className="bg-gradient-to-tr from-grey-500 to-grey-300  text-white rounded-lg"
                   variant="shadow"
                 >
                   End session
