@@ -143,7 +143,7 @@ export const CONTEXTS = [
   {
     context_id: "2",
     description: "Young woman with dietary restrictions.",
-    meta_prompt: "I want you to pretend that you are a young woman with severe dietary restrictions. You've been served a dish that contains ingredients you're allergic to. How will you address this issue with the waiter?"
+    meta_prompt: "I want you to pretend that you are a young woman with severe dietary restrictions. You've been served a dish that contains ingredients you're allergic to. You are feeling sick, are very upset and need the waitor to call an ambulance."
   },
   {
     context_id: "3",
@@ -152,8 +152,8 @@ export const CONTEXTS = [
   },
   {
     context_id: "4",
-    description: "Businessman in a rush.",
-    meta_prompt: "I want you to pretend that you are a businessman in a hurry for a meeting. You've just been informed that your meal will take an additional 20 minutes to prepare. What will you say to the waiter to express your frustration and need for speed?"
+    description: "Businessperson in a rush.",
+    meta_prompt: "I want you to pretend that you are a businessperson in a hurry for a meeting. You've just been informed that your meal will take an additional 20 minutes to prepare. Tell the waitor your annoyed and want to leave."
   },
   {
     context_id: "5",
@@ -163,7 +163,7 @@ export const CONTEXTS = [
   {
     context_id: "6",
     description: "Tourist unfamiliar with the menu.",
-    meta_prompt: "I want you to pretend that you are a tourist who is unfamiliar with the local cuisine. You are unsure what to order and need the waiter's assistance. How do you ask for recommendations and clarify your preferences?"
+    meta_prompt: "I want you to pretend that you are a tourist who is unfamiliar with the local cuisine. You are unsure what to order and need the waiter's help. You are very fusy. Ask for recommendations and suggestions."
   },
   {
     context_id: "7",
@@ -173,17 +173,17 @@ export const CONTEXTS = [
   {
     context_id: "8",
     description: "Vegan upset about limited options.",
-    meta_prompt: "I want you to pretend that you are a vegan who is upset about the limited options on the menu. You feel the restaurant should cater more to different dietary preferences. What do you say to the manager to express your concerns?"
+    meta_prompt: "I want you to pretend that you are a vegan who is upset about the limited options on the menu. What do you say to the manager to express your anger?"
   },
   {
     context_id: "9",
     description: "Regular customer dissatisfied with a new menu.",
-    meta_prompt: "I want you to pretend that you are a regular customer who is dissatisfied with the new menu changes. Your favorite dish has been removed. How do you communicate your disappointment to the waiter?"
+    meta_prompt: "I want you to pretend that you are a regular customer who is dissatisfied with the new menu changes. Your favorite dish has been removed. Tell the waitor how annoyed you are."
   },
   {
     context_id: "10",
     description: "Customer receiving poor service.",
-    meta_prompt: "I want you to pretend that you are a customer receiving consistently poor service throughout your meal. The waiter has been inattentive, and your order was incorrect. How do you address these issues when the waiter finally returns to your table?"
+    meta_prompt: "I want you to pretend that you are a customer receiving consistently poor service throughout your meal. The waiter has been inattentive, and your order was incorrect. When the waitor returns, you lash out in frustration"
   },
   {
     context_id: "11",

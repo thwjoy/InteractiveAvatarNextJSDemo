@@ -9,19 +9,19 @@ export default function InteractiveAvatarCode() {
       <ul>
         <li>
           <div className="flex flex-row gap-2">
-            <p className="text-indigo-400 font-semibold">Start:</p> Start the
+            <p className="text-yellow-400 font-semibold">Start:</p> Start the
             Interactive Avatar session
           </div>
         </li>
         <li>
           <div className="flex flex-row gap-2">
-            <p className="text-indigo-400 font-semibold">Close:</p> Close the
+            <p className="text-yellow-400 font-semibold">Close:</p> Close the
             Interactive Avatar session
           </div>
         </li>
         <li>
           <div className="flex flex-row gap-2">
-            <p className="text-indigo-400 font-semibold">Speak:</p> Repeat the
+            <p className="text-yellow-400 font-semibold">Speak:</p> Repeat the
             input
           </div>
         </li>
