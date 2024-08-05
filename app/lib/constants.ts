@@ -137,16 +137,62 @@ export const VOICES = [
 export const CONTEXTS = [
   {
     context_id: "1",
-    description: "Angry 50yr female on wedding anniversary who recieved cold steak",
-    meta_prompt: "I want you to pretend that you are an angry customer who is female and in their 50s. \
-      You've ordered a steak which has arrived cold and over-done, ruining your wedding aniversary, what are you going to say to me? \
-      ",
+    description: "Elderly gentleman complaining about slow service.",
+    meta_prompt: "I want you to pretend that you are an elderly gentleman who is upset about the slow service at the restaurant. You've been waiting for over 30 minutes for your meal. What are you going to say to the waiter?"
   },
   {
     context_id: "2",
+    description: "Young woman with dietary restrictions.",
+    meta_prompt: "I want you to pretend that you are a young woman with severe dietary restrictions. You've been served a dish that contains ingredients you're allergic to. How will you address this issue with the waiter?"
+  },
+  {
+    context_id: "3",
+    description: "Parent with misbehaving children.",
+    meta_prompt: "I want you to pretend that you are a parent dining with two young, misbehaving children. The noise is disturbing other guests, and the waiter is approaching you to address the situation. How do you respond?"
+  },
+  {
+    context_id: "4",
+    description: "Businessman in a rush.",
+    meta_prompt: "I want you to pretend that you are a businessman in a hurry for a meeting. You've just been informed that your meal will take an additional 20 minutes to prepare. What will you say to the waiter to express your frustration and need for speed?"
+  },
+  {
+    context_id: "5",
+    description: "Romantic couple celebrating an anniversary.",
+    meta_prompt: "I want you to pretend that you are part of a romantic couple celebrating your anniversary. The waiter has brought the wrong wine to your table. How do you politely address this issue to ensure your special night isn't ruined?"
+  },
+  {
+    context_id: "6",
+    description: "Tourist unfamiliar with the menu.",
+    meta_prompt: "I want you to pretend that you are a tourist who is unfamiliar with the local cuisine. You are unsure what to order and need the waiter's assistance. How do you ask for recommendations and clarify your preferences?"
+  },
+  {
+    context_id: "7",
+    description: "Customer with a missing reservation.",
+    meta_prompt: "I want you to pretend that you are a customer who made a reservation a week ago, but upon arrival, the restaurant has no record of it. How do you handle this situation with the hostess to ensure you get a table?"
+  },
+  {
+    context_id: "8",
+    description: "Vegan upset about limited options.",
+    meta_prompt: "I want you to pretend that you are a vegan who is upset about the limited options on the menu. You feel the restaurant should cater more to different dietary preferences. What do you say to the manager to express your concerns?"
+  },
+  {
+    context_id: "9",
+    description: "Regular customer dissatisfied with a new menu.",
+    meta_prompt: "I want you to pretend that you are a regular customer who is dissatisfied with the new menu changes. Your favorite dish has been removed. How do you communicate your disappointment to the waiter?"
+  },
+  {
+    context_id: "10",
+    description: "Customer receiving poor service.",
+    meta_prompt: "I want you to pretend that you are a customer receiving consistently poor service throughout your meal. The waiter has been inattentive, and your order was incorrect. How do you address these issues when the waiter finally returns to your table?"
+  },
+  {
+    context_id: "11",
+    description: "Angry 50yr female on wedding anniversary who recieved cold steak",
+    meta_prompt: "I want you to pretend that you are an angry customer who is female and in their 50s. You've ordered a steak which has arrived cold and over-done, ruining your wedding aniversary, what are you going to say to me?",
+  },
+  {
+    context_id: "12",
     description: "Young drunk man, who won't leave the resturant",
-    meta_prompt: "I want you to pretend that you are a young man who is drunk and won't leave the resturant. \
-      You've been asked to leave ther resturant and keep singing the Hills are Alive With the Sound of Music. \
-      ",
+    meta_prompt: "I want you to pretend that you are a young man who is drunk and won't leave the resturant. You've been asked to leave ther resturant and keep singing the Hills are Alive With the Sound of Music.",
   },
 ];
