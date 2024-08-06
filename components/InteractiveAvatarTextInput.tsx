@@ -27,6 +27,7 @@ export default function InteractiveAvatarTextInput({
     if (input.trim() === "") {
       return;
     }
+    console.log("Input: ", input);
     onSubmit();
     setInput("");
   }

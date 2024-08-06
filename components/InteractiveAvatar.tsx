@@ -49,6 +49,7 @@ export default function InteractiveAvatar() {
   const audioChunks = useRef<Blob[]>([]);
   const { input, setInput, handleSubmit } = useChat({
     onFinish: async (message) => {
+      console.log("ChatGPT Input:", input);
       console.log("ChatGPT Response:", message);
 
       if (!initialized || !avatar.current) {
@@ -109,14 +110,7 @@ export default function InteractiveAvatar() {
       );
       setData(res);
       setStream(avatar.current.mediaStream);
-      // get the contect here
       const context = CONTEXTS.find(ctx => ctx.context_id === contextId);
-      // if (context) {
-      //   const metaPrompt = context.meta_prompt;
-      // } else {
-      //   const metaPrompt =  'You are a customer at a resturant';
-      // }
-      // console.log("Context", context.meta_prompt);
       setContext(context);
     } catch (error) {
       console.error("Error starting avatar session:", error);
@@ -230,6 +224,7 @@ export default function InteractiveAvatar() {
         };
         mediaRecorder.current.start();
         setRecording(true);
+        console.log("Recording started");
       })
       .catch((error) => {
         console.error("Error accessing microphone:", error);
@@ -241,6 +236,7 @@ export default function InteractiveAvatar() {
       mediaRecorder.current.stop();
       setRecording(false);
     }
+    console.log("Recording stopped");
   }
 
   async function transcribeAudio(audioBlob: Blob) {
