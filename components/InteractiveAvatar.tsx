@@ -383,7 +383,7 @@ export default function InteractiveAvatar() {
               <Button
                 size="md"
                 onClick={startSession}
-                className="bg-gradient-to-tr from-yellow-500 to-yellow-300 w-full text-white"
+                className="bg-gradient-to-tr from-grey-500 to-grey-300  w-full text-white rounded-lg"
                 variant="shadow"
               >
                 Start session
@@ -429,7 +429,7 @@ export default function InteractiveAvatar() {
                   className={clsx(
                     "mr-4 text-white",
                     !recording
-                      ? "bg-gradient-to-tr from-yellow-500 to-yellow-300"
+                      ? "bg-gradient-to-tr from-grey-500 to-grey-300  text-white rounded-lg"
                       : ""
                   )}
                   size="sm"
@@ -439,7 +439,7 @@ export default function InteractiveAvatar() {
                     <Microphone size={20} />
                   ) : (
                     <>
-                      <div className="absolute h-full w-full bg-gradient-to-tr from-yellow-500 to-yellow-300 animate-pulse -z-10"></div>
+                      <div className="absolute h-full w-full bg-gradient-to-tr from-grey-500 to-grey-300 animate-pulse -z-10"></div>
                       <MicrophoneStage size={20} />
                     </>
                   )}

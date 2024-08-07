@@ -40,7 +40,7 @@ export default function InteractiveAvatarTextInput({
           <Tooltip content="Send message">
             {loading ? (
               <Spinner
-                className="text-yellow-300 hover:text-yellow-200"
+                className="text-grey-300 hover:text-grey-200"
                 size="sm"
                 color="default"
               />
@@ -52,7 +52,7 @@ export default function InteractiveAvatarTextInput({
               >
                 <PaperPlaneRight
                   className={clsx(
-                    "text-yellow-300 hover:text-yellow-200",
+                    "text-grey-300 hover:text-grey-200",
                     disabled && "opacity-50"
                   )}
                   size={24}
