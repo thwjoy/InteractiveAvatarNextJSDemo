@@ -47,6 +47,7 @@ export default function InteractiveAvatar() {
   const avatar = useRef<StreamingAvatarApi | null>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const audioChunks = useRef<Blob[]>([]);
+  const [isInputSet, setIsInputSet] = useState(false);
   const { input, setInput, handleSubmit } = useChat({
     onFinish: async (message) => {
       console.log("ChatGPT Input:", input);
@@ -251,11 +252,22 @@ export default function InteractiveAvatar() {
       });
       const transcription = response.text;
       console.log("Transcription: ", transcription);
-      setInput(transcription);
+      setInput(transcription)
+      setIsInputSet(true);
     } catch (error) {
       console.error("Error transcribing audio:", error);
     }
   }
+
+
+  // on isInputSet 
+  useEffect(() => {
+    if (isInputSet) {
+      console.log('Input set:', input);
+      setIsInputSet(false);
+      handleSubmit();
+    }
+  }, [isInputSet]);
 
   return (
     <div className="w-full flex flex-col gap-4">

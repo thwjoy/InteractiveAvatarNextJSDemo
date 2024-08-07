@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: `%s - Interactive Training Avatar`,
   },
   icons: {
-    icon: "/heygen-logo.png",
+    icon: "/favicons/favicon-48.png"
   },
 };
 
