@@ -11,8 +11,10 @@ export async function POST() {
       {
         method: "POST",
         headers: {
+          "content-type": "application/json",
           "x-api-key": HEYGEN_API_KEY,
         },
+        body: JSON.stringify({}),
       }
     );
     const data = await res.json();
