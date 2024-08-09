@@ -35,6 +35,7 @@ export default function InteractiveAvatar() {
   const [isLoadingChat, setIsLoadingChat] = useState(false);
   const [stream, setStream] = useState<MediaStream>();
   const [debug, setDebug] = useState<string>();
+  const [transcript, setTranscript] = useState<string[]>([]);
   const [avatarId, setAvatarId] = useState<string>("");
   const [voiceId, setVoiceId] = useState<string>("");
   const [contextId, setContextId] = useState<string>("");
@@ -58,6 +59,9 @@ export default function InteractiveAvatar() {
         return;
       }
 
+      addTranscript(`User: ${input}`);
+      addTranscript(`ChatGPT: ${message.content}`);
+
       //send the ChatGPT response to the Interactive Avatar
       await avatar.current
         .speak({
@@ -76,6 +80,10 @@ export default function InteractiveAvatar() {
       },
     ],
   });
+
+  const addTranscript = (newTranscript: string) => {
+    setTranscript(prevTranscripts => [...prevTranscripts, newTranscript]);
+  };
 
   async function fetchAccessToken() {
     try {
@@ -111,8 +119,7 @@ export default function InteractiveAvatar() {
       );
       setData(res);
       setStream(avatar.current.mediaStream);
-      const context = CONTEXTS.find(ctx => ctx.context_id === contextId);
-      setContext(context);
+      setTranscript([]);
     } catch (error) {
       console.error("Error starting avatar session:", error);
       setDebug(
@@ -166,6 +173,7 @@ export default function InteractiveAvatar() {
       setDebug
     );
     setStream(undefined);
+    setTranscript([]);
   }
 
   async function handleSpeak() {
@@ -308,15 +316,15 @@ export default function InteractiveAvatar() {
             </div>
           ) : !isLoadingSession ? (
             <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
-              <div className="flex flex-col gap-2 w-full">
+              {/* <div className="flex flex-col gap-2 w-full">
                 <p className="text-sm font-medium leading-none">
                   Select an Avatar Profile
                 </p>
-                {/* // <Input
+                // <Input
                 //   value={avatarId}
                 //   onChange={(e) => setAvatarId(e.target.value)}
                 //   placeholder="Enter a custom avatar ID"
-                // /> */}
+                //
                 <Select
                   placeholder="Avatar Profile"
                   size="md"
@@ -343,20 +351,20 @@ export default function InteractiveAvatar() {
                   onChange={(e) => setVoiceId(e.target.value)}
                   placeholder="Enter a custom voice ID"
                 /> */}
-                <Select
+                {/* <Select
                   placeholder="Voice Profile"
                   size="md"
                   onChange={(e) => {
                     setVoiceId(e.target.value);
                   }}
-                >
-                  {VOICES.map((voice) => (
+                > */}
+                  {/* {VOICES.map((voice) => (
                     <SelectItem key={voice.voice_id} textValue={voice.voice_id}>
                       {voice.name} | {voice.language} | {voice.gender}
                     </SelectItem>
                   ))}
                 </Select>
-              </div>
+              </div> */}
               <div className="flex flex-col gap-2 w-full">
                 <p className="text-sm font-medium leading-none">
                   Select a Context Profile
@@ -371,6 +379,10 @@ export default function InteractiveAvatar() {
                   size="md"
                   onChange={(e) => {
                     setContextId(e.target.value);
+                    setContext(CONTEXTS[parseInt(e.target.value, 10) - 1]);
+                    // console.log(CONTEXTS[parseInt(e.target.value, 10) - 1]);
+                    setVoiceId(CONTEXTS[parseInt(e.target.value, 10) - 1].voice_id);
+                    setAvatarId(CONTEXTS[parseInt(e.target.value, 10) - 1].avatar_id);
                   }}
                 >
                   {CONTEXTS.map((context) => (
@@ -454,6 +466,13 @@ export default function InteractiveAvatar() {
         <span className="font-bold">Console:</span>
         <br />
         {debug}
+      </p>
+      <p className="font-mono text-left">
+        <span className="font-bold">Transcript:</span>
+        <br />
+          {transcript.map((t, index) => (
+            <p key={index}>{t}</p>
+          ))}
       </p>
     </div>
   );

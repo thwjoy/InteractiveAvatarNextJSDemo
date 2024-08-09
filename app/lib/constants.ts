@@ -137,62 +137,106 @@ export const VOICES = [
 export const CONTEXTS = [
   {
     context_id: "1",
-    description: "Elderly gentleman complaining about slow service.",
-    meta_prompt: "I want you to pretend that you are an elderly gentleman who is upset about the slow service at the restaurant. You've been waiting for over 30 minutes for your meal. What are you going to say to the waiter?"
+    description: "Gentleman complaining about slow service.",
+    meta_prompt: "I want you to pretend that you are a gentleman who is upset about the slow service at the restaurant. You've been waiting for over 30 minutes for your meal. What are you going to say to the waiter? Be short and grumpy with your responses.",
+    voice_id: "ccb30e87c6b34ca8941f88352c71612d",
+    language: "English",
+    gender: "Male",
+    voice_name: "Noah - Serious",
+    preview_audio: "https://static.heygen.ai/voice_preview/UDzn8mZ5eKbXrQQojCVMud.wav",
+    support_pause: true,
+    emotion_support: true,
+    avatar_id: "Tyler-incasualsuit-20220721",
+    avatar_name: "Tyler in Casual Suit",
   },
   {
     context_id: "2",
     description: "Young woman with dietary restrictions.",
-    meta_prompt: "I want you to pretend that you are a young woman with severe dietary restrictions. You've been served a dish that contains ingredients you're allergic to. You are feeling sick, are very upset and need the waitor to call an ambulance."
+    meta_prompt: "I want you to pretend that you are a young woman with severe dietary restrictions. You've been served a dish that contains ingredients you're allergic to. You are feeling sick, are very angry need the waitor to call an ambulance. Be short with your responses.",
+    voice_id: "1bd001e7e50f421d891986aad5158bc8",
+    language: "English",
+    gender: "Female",
+    voice_name: "Sara - Serious",
+    preview_audio:
+      "https://static.heygen.ai/voice_preview/func8CFnfVLKF2VzGDCDCR.wav",
+    support_pause: true,
+    emotion_support: true,
+    avatar_id: "Lily_public_pro1_20230614",
+    avatar_name: "Leah in Black Suit",
   },
   {
     context_id: "3",
-    description: "Parent with misbehaving children.",
-    meta_prompt: "I want you to pretend that you are a parent dining with two young, misbehaving children. The noise is disturbing other guests, and the waiter is approaching you to address the situation. How do you respond?"
+    description: "Businessperson in a rush.",
+    meta_prompt: "I want you to pretend that you are a businessperson in a hurry for a meeting. You've just been informed that your meal will take an additional 20 minutes to prepare. Tell the waitor you're annoyed and want to leave. Do not be polite.",
+    voice_id: "0ebe70d83b2349529e56492c002c9572",
+    language: "English",
+    gender: "Male",
+    voice_name: "Antoni - Professional",
+    preview_audio:
+      "https://static.heygen.ai/voice_preview/TwupgZ2az5RiTnmAifPmmS.mp3",
+    support_pause: true,
+    emotion_support: false,
+    avatar_id: "Eric_public_pro2_20230608",
+    avatar_name: "Edward in Blue Shirt",
   },
   {
     context_id: "4",
-    description: "Businessperson in a rush.",
-    meta_prompt: "I want you to pretend that you are a businessperson in a hurry for a meeting. You've just been informed that your meal will take an additional 20 minutes to prepare. Tell the waitor your annoyed and want to leave."
+    description: "Romantic couple celebrating an anniversary.",
+    meta_prompt: "I want you to pretend that you are part of a romantic couple celebrating your anniversary. The waiter has brought the wrong wine to your table. Be short with your responses.",
+    voice_id: "1bd001e7e50f421d891986aad5158bc8",
+    language: "English",
+    gender: "Female",
+    voice_name: "Sara - Cheerful",
+    preview_audio:
+      "https://static.heygen.ai/voice_preview/func8CFnfVLKF2VzGDCDCR.wav",
+    support_pause: true,
+    emotion_support: true,
+    avatar_id: "Susan_public_2_20240328",
+    name: "Susan in Black Shirt",
   },
   {
     context_id: "5",
-    description: "Romantic couple celebrating an anniversary.",
-    meta_prompt: "I want you to pretend that you are part of a romantic couple celebrating your anniversary. The waiter has brought the wrong wine to your table. How do you politely address this issue to ensure your special night isn't ruined?"
+    description: "Chatty tourist unfamiliar with the menu.",
+    meta_prompt: "I want you to pretend that you are a tourist who is unfamiliar with the local cuisine. You are unsure what to order and need the waiter's help. You are very fusy. Ask for recommendations and suggestions. You talk a lot.",
+    voice_id: "cbb56828d798491e9f601a5415415e25",
+    language: "Spanish",
+    gender: "Female",
+    voice_name: "Larissa - Friendly",
+    preview_audio: "https://static.heygen.ai/voice_preview/Jg5MDxyd6pjrPhvPLepFdh.wav",
+    support_pause: true,
+    emotion_support: true,
+    avatar_id: "Anna_public_3_20240108",
+    name: "Anna in Brown T-shirt",
   },
   {
     context_id: "6",
-    description: "Tourist unfamiliar with the menu.",
-    meta_prompt: "I want you to pretend that you are a tourist who is unfamiliar with the local cuisine. You are unsure what to order and need the waiter's help. You are very fusy. Ask for recommendations and suggestions."
+    description: "Customer with a missing reservation.",
+    meta_prompt: "I want you to pretend that you are a customer who made a reservation a week ago, but upon arrival, the restaurant has no record of it. You need to make up a name and a time. How do you handle this situation with the hostess to ensure you get a table? Keep your answers short and to the point.",
+    voice_id: "1bd001e7e50f421d891986aad5158bc8",
+    language: "English",
+    gender: "Female",
+    voice_name: "Sara - Serious",
+    preview_audio:
+      "https://static.heygen.ai/voice_preview/func8CFnfVLKF2VzGDCDCR.wav",
+    support_pause: true,
+    emotion_support: true,
+    avatar_id: "Susan_public_2_20240328",
+    name: "Susan in Black Shirt",
   },
   {
     context_id: "7",
-    description: "Customer with a missing reservation.",
-    meta_prompt: "I want you to pretend that you are a customer who made a reservation a week ago, but upon arrival, the restaurant has no record of it. How do you handle this situation with the hostess to ensure you get a table?"
-  },
-  {
-    context_id: "8",
-    description: "Vegan upset about limited options.",
-    meta_prompt: "I want you to pretend that you are a vegan who is upset about the limited options on the menu. What do you say to the manager to express your anger?"
-  },
-  {
-    context_id: "9",
-    description: "Regular customer dissatisfied with a new menu.",
-    meta_prompt: "I want you to pretend that you are a regular customer who is dissatisfied with the new menu changes. Your favorite dish has been removed. Tell the waitor how annoyed you are."
-  },
-  {
-    context_id: "10",
     description: "Customer receiving poor service.",
-    meta_prompt: "I want you to pretend that you are a customer receiving consistently poor service throughout your meal. The waiter has been inattentive, and your order was incorrect. When the waitor returns, you lash out in frustration"
-  },
-  {
-    context_id: "11",
-    description: "Angry 50yr female on wedding anniversary who recieved cold steak",
-    meta_prompt: "I want you to pretend that you are an angry customer who is female and in their 50s. You've ordered a steak which has arrived cold and over-done, ruining your wedding aniversary, what are you going to say to me?",
-  },
-  {
-    context_id: "12",
-    description: "Young drunk man, who won't leave the resturant",
-    meta_prompt: "I want you to pretend that you are a young man who is drunk and won't leave the resturant. You've been asked to leave ther resturant and keep singing the Hills are Alive With the Sound of Music.",
-  },
+    meta_prompt: "I want you to pretend that you are a customer receiving consistently poor service throughout your meal. The waiter has been inattentive, and your order was incorrect. When the waitor returns, you lash out in frustration. Be short with your answers",
+    voice_id: "071d6bea6a7f455b82b6364dab9104a2",
+    language: "German",
+    gender: "Male",
+    voice_name: "Jan - Natural",
+    preview_audio:
+      "https://static.heygen.ai/voice_preview/fa3728bed81a4d11b8ccef10506af5f4.wav",
+    support_pause: true,
+    emotion_support: true,
+    avatar_id: "Eric_public_pro2_20230608",
+    name: "Edward in Blue Shirt",
+
+  }
 ];
