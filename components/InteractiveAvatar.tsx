@@ -49,7 +49,7 @@ export default function InteractiveAvatar() {
   const mediaRecorder = useRef<MediaRecorder | null>(null);
   const audioChunks = useRef<Blob[]>([]);
   const [isInputSet, setIsInputSet] = useState(false);
-  const { input, setInput, handleSubmit } = useChat({
+  const { input, setMessages, setInput, handleSubmit } = useChat({
     onFinish: async (message) => {
       console.log("ChatGPT Input:", input);
       console.log("ChatGPT Response:", message);
@@ -72,13 +72,6 @@ export default function InteractiveAvatar() {
         });
       setIsLoadingChat(false);
     },
-    initialMessages: [
-      {
-        id: "1",
-        role: "system",
-        content: context?.meta_prompt,
-      },
-    ],
   });
 
   const addTranscript = (newTranscript: string) => {
@@ -120,6 +113,13 @@ export default function InteractiveAvatar() {
       setData(res);
       setStream(avatar.current.mediaStream);
       setTranscript([]);
+      setMessages([
+        {
+          id: "1",
+          role: "system",
+          content: context?.meta_prompt,
+        },
+      ]);
     } catch (error) {
       console.error("Error starting avatar session:", error);
       setDebug(
@@ -173,7 +173,6 @@ export default function InteractiveAvatar() {
       setDebug
     );
     setStream(undefined);
-    setTranscript([]);
   }
 
   async function handleSpeak() {
