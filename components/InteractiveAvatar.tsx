@@ -314,7 +314,7 @@ export default function InteractiveAvatar() {
                   className="bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
                   variant="shadow"
                 >
-                  End Session
+                  End Situation
                 </Button>
               </div>
             </div>
@@ -326,7 +326,7 @@ export default function InteractiveAvatar() {
                 className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
                 variant="shadow"
               >
-                Start Session
+                Start Situation
               </Button>
             </div>
           ) : !isLoadingSession ? (
@@ -413,7 +413,7 @@ export default function InteractiveAvatar() {
                 className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
                 variant="shadow"
               >
-                Start Session
+                Start Situation
               </Button>
             </div>
           ) : (
