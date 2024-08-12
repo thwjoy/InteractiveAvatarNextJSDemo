@@ -60,8 +60,8 @@ export default function InteractiveAvatar() {
         return;
       }
 
-      addTranscript(`User: ${input}`);
-      addTranscript(`ChatGPT: ${message.content}`);
+      addTranscript(`You: ${input}`);
+      addTranscript(`Customer: ${message.content}`);
 
       //send the ChatGPT response to the Interactive Avatar
       await avatar.current
@@ -277,6 +277,7 @@ export default function InteractiveAvatar() {
       console.log('Input set:', input);
       setIsInputSet(false);
       handleSubmit();
+      setIsLoadingChat(true);
     }
   }, [isInputSet]);
 
@@ -299,21 +300,21 @@ export default function InteractiveAvatar() {
                 <track kind="captions" />
               </video>
               <div className="flex flex-col gap-2 absolute bottom-3 right-3">
-                <Button
+                {/* <Button
                   size="md"
                   onClick={handleInterrupt}
-                  className="bg-gradient-to-tr from-grey-500 to-grey-300 text-white rounded-lg"
+                  className="bg-gradient-to-tr from-blue-500 to-blue-500 text-white rounded-lg"
                   variant="shadow"
                 >
                   Interrupt task
-                </Button>
+                </Button> */}
                 <Button
                   size="md"
                   onClick={endSession}
-                  className="bg-gradient-to-tr from-grey-500 to-grey-300  text-white rounded-lg"
+                  className="bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
                   variant="shadow"
                 >
-                  End session
+                  End Session
                 </Button>
               </div>
             </div>
@@ -322,10 +323,10 @@ export default function InteractiveAvatar() {
               <Button
                 size="md"
                 onClick={startSession}
-                className="bg-gradient-to-tr from-grey-500 to-grey-300  w-full text-white rounded-lg"
+                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
                 variant="shadow"
               >
-                Start session
+                Start Session
               </Button>
             </div>
           ) : !isLoadingSession ? (
@@ -381,7 +382,7 @@ export default function InteractiveAvatar() {
               </div> */}
               <div className="flex flex-col gap-2 w-full">
                 <p className="text-sm font-medium leading-none">
-                  Select a Context Profile
+                  Select a Customer Situation
                 </p>
                 {/* <Input
                   value={voiceId}
@@ -389,7 +390,7 @@ export default function InteractiveAvatar() {
                   placeholder="Enter a custom voice ID"
                 /> */}
                 <Select
-                  placeholder="Context Profile"
+                  placeholder="Customer Situation"
                   size="md"
                   onChange={(e) => {
                     setContextId(e.target.value);
@@ -409,10 +410,10 @@ export default function InteractiveAvatar() {
               <Button
                 size="md"
                 onClick={startSession}
-                className="bg-gradient-to-tr from-grey-500 to-grey-300  w-full text-white rounded-lg"
+                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
                 variant="shadow"
               >
-                Start session
+                Start Session
               </Button>
             </div>
           ) : (
@@ -448,14 +449,14 @@ export default function InteractiveAvatar() {
               <Tooltip
                 content={!recording ? "Start recording" : "Stop recording"}
               >
-                <Button
+                {!isLoadingChat ? (<Button
                   onClick={!recording ? startRecording : stopRecording}
                   isDisabled={!stream}
                   isIconOnly
                   className={clsx(
                     "mr-4 text-white",
                     !recording
-                      ? "bg-gradient-to-tr from-grey-500 to-grey-300  text-white rounded-lg"
+                      ? "bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
                       : ""
                   )}
                   size="sm"
@@ -465,29 +466,36 @@ export default function InteractiveAvatar() {
                     <Microphone size={20} />
                   ) : (
                     <>
-                      <div className="absolute h-full w-full bg-gradient-to-tr from-grey-500 to-grey-300 animate-pulse -z-10"></div>
+                      <div className="absolute h-full w-full bg-gradient-to-tr from-blue-500 to-blue-500 animate-pulse -z-10"></div>
                       <MicrophoneStage size={20} />
                     </>
                   )}
                 </Button>
+                ) : (
+                  <Spinner
+                    className="text-grey-300 hover:text-grey-200"
+                    size="sm"
+                    color="default"
+                  />
+                )}
               </Tooltip>
             }
             disabled={!stream}
           />
         </CardFooter>
       </Card>
-      <p className="font-mono text-right">
+      {/* <p className="font-mono text-right">
         <span className="font-bold">Console:</span>
         <br />
         {debug}
-      </p>
-      <p className="font-mono text-left">
+      </p> */}
+      <div className="font-mono text-left">
         <span className="font-bold">Transcript:</span>
         <br />
           {transcript.map((t, index) => (
             <p key={index}>{t}</p>
           ))}
-      </p>
+      </div>
     </div>
   );
 }
