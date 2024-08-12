@@ -136,6 +136,16 @@ export const VOICES = [
 
 export const CONTEXTS = [
   {
+    context_id: "0",
+    description: "Demo instructions.",
+    meta_prompt: "I want you to give me the following instructions: \
+    'Hello, I'm your personal interaction training assistant. I will guide you through a series of role-playing scenarios. \
+    You should treat this like you are interacting with a real customer. \
+    I'm here to help you practice your communication skills. \
+    You can either to talk to me using the chat box below, or use the microphone button to record your voice. \
+    When I have finished talking, please click 'End Session', this will take you to a screen where you can select a situation to practice.' "
+  },
+  {
     context_id: "1",
     description: "Gentleman complaining about slow service.",
     meta_prompt: "I want you to pretend that you are a gentleman who is upset about the slow service at the restaurant. You've been waiting for over 30 minutes for your meal. What are you going to say to the waiter? Be short and grumpy with your responses.",

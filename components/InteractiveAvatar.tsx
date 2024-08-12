@@ -30,8 +30,9 @@ const openai = new OpenAI({
 });
 
 export default function InteractiveAvatar() {
-  const [isLoadingSession, setIsLoadingSession] = useState(false);
+  const [isLoadingSession, setIsLoadingSession] = useState(true);
   const [isLoadingRepeat, setIsLoadingRepeat] = useState(false);
+  const [isNewSession, setIsNewSession] = useState(true);
   const [isLoadingChat, setIsLoadingChat] = useState(false);
   const [stream, setStream] = useState<MediaStream>();
   const [debug, setDebug] = useState<string>();
@@ -40,7 +41,7 @@ export default function InteractiveAvatar() {
   const [voiceId, setVoiceId] = useState<string>("");
   const [contextId, setContextId] = useState<string>("");
   const [data, setData] = useState<NewSessionData>();
-  const [context, setContext] = useState<Json>();
+  const [context, setContext] = useState<Json>(CONTEXTS[0]);
   const [text, setText] = useState<string>("");
   const [initialized, setInitialized] = useState(false); // Track initialization
   const [recording, setRecording] = useState(false); // Track recording state
@@ -120,6 +121,9 @@ export default function InteractiveAvatar() {
           content: context?.meta_prompt,
         },
       ]);
+      setInput('Hello, how can I help you?');
+      setIsInputSet(true);
+      setIsNewSession(false);
     } catch (error) {
       console.error("Error starting avatar session:", error);
       setDebug(
@@ -313,6 +317,17 @@ export default function InteractiveAvatar() {
                 </Button>
               </div>
             </div>
+          ) : isNewSession ? (
+            <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
+              <Button
+                size="md"
+                onClick={startSession}
+                className="bg-gradient-to-tr from-grey-500 to-grey-300  w-full text-white rounded-lg"
+                variant="shadow"
+              >
+                Start session
+              </Button>
+            </div>
           ) : !isLoadingSession ? (
             <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
               {/* <div className="flex flex-col gap-2 w-full">
@@ -378,10 +393,10 @@ export default function InteractiveAvatar() {
                   size="md"
                   onChange={(e) => {
                     setContextId(e.target.value);
-                    setContext(CONTEXTS[parseInt(e.target.value, 10) - 1]);
+                    setContext(CONTEXTS[parseInt(e.target.value, 10)]);
                     // console.log(CONTEXTS[parseInt(e.target.value, 10) - 1]);
-                    setVoiceId(CONTEXTS[parseInt(e.target.value, 10) - 1].voice_id);
-                    setAvatarId(CONTEXTS[parseInt(e.target.value, 10) - 1].avatar_id);
+                    setVoiceId(CONTEXTS[parseInt(e.target.value, 10)].voice_id);
+                    setAvatarId(CONTEXTS[parseInt(e.target.value, 10)].avatar_id);
                   }}
                 >
                   {CONTEXTS.map((context) => (
