@@ -281,221 +281,221 @@ export default function InteractiveAvatar() {
     }
   }, [isInputSet]);
 
-  return (
-    <div className="w-full flex flex-col gap-4">
-      <Card>
-        <CardBody className="h-[500px] flex flex-col justify-center items-center">
-          {stream ? (
-            <div className="h-[500px] w-[900px] justify-center items-center flex rounded-lg overflow-hidden">
-              <video
-                ref={mediaStream}
-                autoPlay
-                playsInline
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "contain",
-                }}
-              >
-                <track kind="captions" />
-              </video>
-              <div className="flex flex-col gap-2 absolute bottom-3 right-3">
-                {/* <Button
-                  size="md"
-                  onClick={handleInterrupt}
-                  className="bg-gradient-to-tr from-blue-500 to-blue-500 text-white rounded-lg"
-                  variant="shadow"
-                >
-                  Interrupt task
-                </Button> */}
-                <Button
-                  size="md"
-                  onClick={endSession}
-                  className="bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
-                  variant="shadow"
-                >
-                  End Situation
-                </Button>
-              </div>
-            </div>
-          ) : isNewSession ? (
-            <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
-              <Button
-                size="md"
-                onClick={startSession}
-                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
-                variant="shadow"
-              >
-                Start Situation
-              </Button>
-            </div>
-          ) : !isLoadingSession ? (
-            <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
-              {/* <div className="flex flex-col gap-2 w-full">
-                <p className="text-sm font-medium leading-none">
-                  Select an Avatar Profile
-                </p>
-                // <Input
-                //   value={avatarId}
-                //   onChange={(e) => setAvatarId(e.target.value)}
-                //   placeholder="Enter a custom avatar ID"
-                //
-                <Select
-                  placeholder="Avatar Profile"
-                  size="md"
-                  onChange={(e) => {
-                    setAvatarId(e.target.value);
-                  }}
-                >
-                  {AVATARS.map((avatar) => (
-                    <SelectItem
-                      key={avatar.avatar_id}
-                      textValue={avatar.avatar_id}
-                    >
-                      {avatar.name}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex flex-col gap-2 w-full">
-                <p className="text-sm font-medium leading-none">
-                  Select a Voice Profile
-                </p>
-                {/* <Input
-                  value={voiceId}
-                  onChange={(e) => setVoiceId(e.target.value)}
-                  placeholder="Enter a custom voice ID"
-                /> */}
-                {/* <Select
-                  placeholder="Voice Profile"
-                  size="md"
-                  onChange={(e) => {
-                    setVoiceId(e.target.value);
-                  }}
-                > */}
-                  {/* {VOICES.map((voice) => (
-                    <SelectItem key={voice.voice_id} textValue={voice.voice_id}>
-                      {voice.name} | {voice.language} | {voice.gender}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div> */}
-              <div className="flex flex-col gap-2 w-full">
-                <p className="text-sm font-medium leading-none">
-                  Select a Customer Situation
-                </p>
-                {/* <Input
-                  value={voiceId}
-                  onChange={(e) => setVoiceId(e.target.value)}
-                  placeholder="Enter a custom voice ID"
-                /> */}
-                <Select
-                  placeholder="Customer Situation"
-                  size="md"
-                  onChange={(e) => {
-                    setContextId(e.target.value);
-                    setContext(CONTEXTS[parseInt(e.target.value, 10)]);
-                    // console.log(CONTEXTS[parseInt(e.target.value, 10) - 1]);
-                    setVoiceId(CONTEXTS[parseInt(e.target.value, 10)].voice_id);
-                    setAvatarId(CONTEXTS[parseInt(e.target.value, 10)].avatar_id);
-                  }}
-                >
-                  {CONTEXTS.map((context) => (
-                    <SelectItem key={context.context_id} textValue={context.meta_prompt}>
-                      {context.description}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <Button
-                size="md"
-                onClick={startSession}
-                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
-                variant="shadow"
-              >
-                Start Situation
-              </Button>
-            </div>
-          ) : (
-            <Spinner size="lg" color="default" />
-          )}
-        </CardBody>
-        <Divider />
-        <CardFooter className="flex flex-col gap-3">
-          {/* <InteractiveAvatarTextInput
-            label="Repeat"
-            placeholder="Type something for the avatar to repeat"
-            input={text}
-            onSubmit={handleSpeak}
-            setInput={setText}
-            disabled={!stream}
-            loading={isLoadingRepeat}
-          /> */}
-          <InteractiveAvatarTextInput
-            label="Chat"
-            placeholder="Enter response here.."
-            input={input}
-            onSubmit={() => {
-              setIsLoadingChat(true);
-              if (!input) {
-                setDebug("Please enter text to send to ChatGPT");
-                return;
-              }
-              handleSubmit();
-            }}
-            setInput={setInput}
-            loading={isLoadingChat}
-            endContent={
-              <Tooltip
-                content={!recording ? "Start recording" : "Stop recording"}
-              >
-                {!isLoadingChat ? (<Button
-                  onClick={!recording ? startRecording : stopRecording}
-                  isDisabled={!stream}
-                  isIconOnly
-                  className={clsx(
-                    "mr-4 text-white",
-                    !recording
-                      ? "bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
-                      : ""
-                  )}
-                  size="sm"
-                  variant="shadow"
-                >
-                  {!recording ? (
-                    <Microphone size={20} />
-                  ) : (
-                    <>
-                      <div className="absolute h-full w-full bg-gradient-to-tr from-blue-500 to-blue-500 animate-pulse -z-10"></div>
-                      <MicrophoneStage size={20} />
-                    </>
-                  )}
-                </Button>
-                ) : (
-                  <Spinner
-                    className="text-grey-300 hover:text-grey-200"
-                    size="sm"
-                    color="default"
-                  />
-                )}
-              </Tooltip>
-            }
-            disabled={!stream}
-          />
-        </CardFooter>
-      </Card>
-      {/* <p className="font-mono text-right">
-        <span className="font-bold">Console:</span>
-        <br />
-        {debug}
-      </p> */}
-      <div className="font-mono text-left">
-        <span className="font-bold">Transcript:</span>
-        <br />
-          {transcript.map((t, index) => (
-            <p key={index}>{t}</p>
-          ))}
-      </div>
-    </div>
-  );
+  return ( <div>Under maintenance</div> ) 
+  //   <div className="w-full flex flex-col gap-4">
+  //     <Card>
+  //       <CardBody className="h-[500px] flex flex-col justify-center items-center">
+  //         {stream ? (
+  //           <div className="h-[500px] w-[900px] justify-center items-center flex rounded-lg overflow-hidden">
+  //             <video
+  //               ref={mediaStream}
+  //               autoPlay
+  //               playsInline
+  //               style={{
+  //                 width: "100%",
+  //                 height: "100%",
+  //                 objectFit: "contain",
+  //               }}
+  //             >
+  //               <track kind="captions" />
+  //             </video>
+  //             <div className="flex flex-col gap-2 absolute bottom-3 right-3">
+  //               {/* <Button
+  //                 size="md"
+  //                 onClick={handleInterrupt}
+  //                 className="bg-gradient-to-tr from-blue-500 to-blue-500 text-white rounded-lg"
+  //                 variant="shadow"
+  //               >
+  //                 Interrupt task
+  //               </Button> */}
+  //               <Button
+  //                 size="md"
+  //                 onClick={endSession}
+  //                 className="bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
+  //                 variant="shadow"
+  //               >
+  //                 End Situation
+  //               </Button>
+  //             </div>
+  //           </div>
+  //         ) : isNewSession ? (
+  //           <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
+  //             <Button
+  //               size="md"
+  //               onClick={startSession}
+  //               className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
+  //               variant="shadow"
+  //             >
+  //               Start Situation
+  //             </Button>
+  //           </div>
+  //         ) : !isLoadingSession ? (
+  //           <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
+  //             {/* <div className="flex flex-col gap-2 w-full">
+  //               <p className="text-sm font-medium leading-none">
+  //                 Select an Avatar Profile
+  //               </p>
+  //               // <Input
+  //               //   value={avatarId}
+  //               //   onChange={(e) => setAvatarId(e.target.value)}
+  //               //   placeholder="Enter a custom avatar ID"
+  //               //
+  //               <Select
+  //                 placeholder="Avatar Profile"
+  //                 size="md"
+  //                 onChange={(e) => {
+  //                   setAvatarId(e.target.value);
+  //                 }}
+  //               >
+  //                 {AVATARS.map((avatar) => (
+  //                   <SelectItem
+  //                     key={avatar.avatar_id}
+  //                     textValue={avatar.avatar_id}
+  //                   >
+  //                     {avatar.name}
+  //                   </SelectItem>
+  //                 ))}
+  //               </Select>
+  //             </div>
+  //             <div className="flex flex-col gap-2 w-full">
+  //               <p className="text-sm font-medium leading-none">
+  //                 Select a Voice Profile
+  //               </p>
+  //               {/* <Input
+  //                 value={voiceId}
+  //                 onChange={(e) => setVoiceId(e.target.value)}
+  //                 placeholder="Enter a custom voice ID"
+  //               /> */}
+  //               {/* <Select
+  //                 placeholder="Voice Profile"
+  //                 size="md"
+  //                 onChange={(e) => {
+  //                   setVoiceId(e.target.value);
+  //                 }}
+  //               > */}
+  //                 {/* {VOICES.map((voice) => (
+  //                   <SelectItem key={voice.voice_id} textValue={voice.voice_id}>
+  //                     {voice.name} | {voice.language} | {voice.gender}
+  //                   </SelectItem>
+  //                 ))}
+  //               </Select>
+  //             </div> */}
+  //             <div className="flex flex-col gap-2 w-full">
+  //               <p className="text-sm font-medium leading-none">
+  //                 Select a Customer Situation
+  //               </p>
+  //               {/* <Input
+  //                 value={voiceId}
+  //                 onChange={(e) => setVoiceId(e.target.value)}
+  //                 placeholder="Enter a custom voice ID"
+  //               /> */}
+  //               <Select
+  //                 placeholder="Customer Situation"
+  //                 size="md"
+  //                 onChange={(e) => {
+  //                   setContextId(e.target.value);
+  //                   setContext(CONTEXTS[parseInt(e.target.value, 10)]);
+  //                   // console.log(CONTEXTS[parseInt(e.target.value, 10) - 1]);
+  //                   setVoiceId(CONTEXTS[parseInt(e.target.value, 10)].voice_id);
+  //                   setAvatarId(CONTEXTS[parseInt(e.target.value, 10)].avatar_id);
+  //                 }}
+  //               >
+  //                 {CONTEXTS.map((context) => (
+  //                   <SelectItem key={context.context_id} textValue={context.meta_prompt}>
+  //                     {context.description}
+  //                   </SelectItem>
+  //                 ))}
+  //               </Select>
+  //             </div>
+  //             <Button
+  //               size="md"
+  //               onClick={startSession}
+  //               className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
+  //               variant="shadow"
+  //             >
+  //               Start Situation
+  //             </Button>
+  //           </div>
+  //         ) : (
+  //           <Spinner size="lg" color="default" />
+  //         )}
+  //       </CardBody>
+  //       <Divider />
+  //       <CardFooter className="flex flex-col gap-3">
+  //         {/* <InteractiveAvatarTextInput
+  //           label="Repeat"
+  //           placeholder="Type something for the avatar to repeat"
+  //           input={text}
+  //           onSubmit={handleSpeak}
+  //           setInput={setText}
+  //           disabled={!stream}
+  //           loading={isLoadingRepeat}
+  //         /> */}
+  //         <InteractiveAvatarTextInput
+  //           label="Chat"
+  //           placeholder="Enter response here.."
+  //           input={input}
+  //           onSubmit={() => {
+  //             setIsLoadingChat(true);
+  //             if (!input) {
+  //               setDebug("Please enter text to send to ChatGPT");
+  //               return;
+  //             }
+  //             handleSubmit();
+  //           }}
+  //           setInput={setInput}
+  //           loading={isLoadingChat}
+  //           endContent={
+  //             <Tooltip
+  //               content={!recording ? "Start recording" : "Stop recording"}
+  //             >
+  //               {!isLoadingChat ? (<Button
+  //                 onClick={!recording ? startRecording : stopRecording}
+  //                 isDisabled={!stream}
+  //                 isIconOnly
+  //                 className={clsx(
+  //                   "mr-4 text-white",
+  //                   !recording
+  //                     ? "bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
+  //                     : ""
+  //                 )}
+  //                 size="sm"
+  //                 variant="shadow"
+  //               >
+  //                 {!recording ? (
+  //                   <Microphone size={20} />
+  //                 ) : (
+  //                   <>
+  //                     <div className="absolute h-full w-full bg-gradient-to-tr from-blue-500 to-blue-500 animate-pulse -z-10"></div>
+  //                     <MicrophoneStage size={20} />
+  //                   </>
+  //                 )}
+  //               </Button>
+  //               ) : (
+  //                 <Spinner
+  //                   className="text-grey-300 hover:text-grey-200"
+  //                   size="sm"
+  //                   color="default"
+  //                 />
+  //               )}
+  //             </Tooltip>
+  //           }
+  //           disabled={!stream}
+  //         />
+  //       </CardFooter>
+  //     </Card>
+  //     {/* <p className="font-mono text-right">
+  //       <span className="font-bold">Console:</span>
+  //       <br />
+  //       {debug}
+  //     </p> */}
+  //     <div className="font-mono text-left">
+  //       <span className="font-bold">Transcript:</span>
+  //       <br />
+  //         {transcript.map((t, index) => (
+  //           <p key={index}>{t}</p>
+  //         ))}
+  //     </div>
+  //   </div>
+  // );
 }
