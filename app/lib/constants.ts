@@ -139,11 +139,13 @@ export const CONTEXTS = [
     context_id: "0",
     description: "Demo instructions.",
     meta_prompt: "I want you to give me the following instructions: \
-    'Hello, I'm your personal interaction training assistant. I will guide you through a series of role-playing scenarios. \
+    'Hello, I'm your personal interaction training assistant. I, or another avatar, will guide you through a series of role-playing scenarios. \
     You should treat this like you are interacting with a real customer. \
-    I'm here to help you practice your communication skills. \
+    I'm here to help you practice your communication skills and build up your confidence to deal with customers. \
     You can either to talk to me using the chat box below, or use the microphone button to record your voice. \
-    When I have finished talking, please click 'End Session', this will take you to a screen where you can select a situation to practice.' "
+    When I have finished talking, please click 'End Session', this will take you to a screen where you can select a situation to practice.' ",
+    voice_id: "1bd001e7e50f421d891986aad5158bc8",
+    avatar_id: "Lily_public_pro1_20230614",
   },
   {
     context_id: "1",

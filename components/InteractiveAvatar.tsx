@@ -37,8 +37,8 @@ export default function InteractiveAvatar() {
   const [stream, setStream] = useState<MediaStream>();
   const [debug, setDebug] = useState<string>();
   const [transcript, setTranscript] = useState<string[]>([]);
-  const [avatarId, setAvatarId] = useState<string>("");
-  const [voiceId, setVoiceId] = useState<string>("");
+  const [avatarId, setAvatarId] = useState<string>(CONTEXTS[0].avatar_id);
+  const [voiceId, setVoiceId] = useState<string>(CONTEXTS[0].voice_id);
   const [contextId, setContextId] = useState<string>("");
   const [data, setData] = useState<NewSessionData>();
   const [context, setContext] = useState<Json>(CONTEXTS[0]);
