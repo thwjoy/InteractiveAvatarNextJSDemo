@@ -30,9 +30,9 @@ const openai = new OpenAI({
 });
 
 export default function InteractiveAvatar() {
-  const [isLoadingSession, setIsLoadingSession] = useState(true);
+  const [isLoadingSession, setIsLoadingSession] = useState(false);
   const [isLoadingRepeat, setIsLoadingRepeat] = useState(false);
-  const [isNewSession, setIsNewSession] = useState(true);
+  const [isNewSession, setIsNewSession] = useState(false);
   const [isLoadingChat, setIsLoadingChat] = useState(false);
   const [stream, setStream] = useState<MediaStream>();
   const [debug, setDebug] = useState<string>();
@@ -312,10 +312,10 @@ export default function InteractiveAvatar() {
                 <Button
                   size="md"
                   onClick={endSession}
-                  className="bg-gradient-to-tr from-blue-500 to-blue-500  text-white rounded-lg"
+                  className="bg-gradient-to-tr from-red-500 to-red-500  text-white rounded-lg"
                   variant="shadow"
                 >
-                  End Situation
+                  Switch Situation
                 </Button>
               </div>
             </div>
@@ -434,12 +434,12 @@ export default function InteractiveAvatar() {
           /> */}
           <InteractiveAvatarTextInput
             label="Chat"
-            placeholder="Enter response here.."
+            placeholder="Enter response here, or press the microphone button to record"
             input={input}
             onSubmit={() => {
               setIsLoadingChat(true);
               if (!input) {
-                setDebug("Please enter text to send to ChatGPT");
+                setDebug("Please enter text or record audio");
                 return;
               }
               handleSubmit();
@@ -467,7 +467,7 @@ export default function InteractiveAvatar() {
                     <Microphone size={20} />
                   ) : (
                     <>
-                      <div className="absolute h-full w-full bg-gradient-to-tr from-blue-500 to-blue-500 animate-pulse -z-10"></div>
+                      <div className="absolute h-full w-full bg-gradient-to-tr from-red-500 to-red-500 animate-pulse -z-10"></div>
                       <MicrophoneStage size={20} />
                     </>
                   )}
