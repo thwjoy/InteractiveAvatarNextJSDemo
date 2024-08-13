@@ -285,9 +285,9 @@ export default function InteractiveAvatar() {
   return ( 
     <div className="w-full flex flex-col gap-4">
       <Card>
-        <CardBody className="h-[500px] flex flex-col justify-center items-center">
+        <CardBody className="h-[80vh] flex flex-col justify-center items-center">
           {stream ? (
-            <div className="h-[500px] w-[900px] justify-center items-center flex rounded-lg overflow-hidden">
+            <div className="h-[80vh] w-[85vw] md:w-3/4 justify-center items-center flex rounded-lg overflow-hidden">
               <video
                 ref={mediaStream}
                 autoPlay
@@ -320,18 +320,18 @@ export default function InteractiveAvatar() {
               </div>
             </div>
           ) : isNewSession ? (
-            <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
+            <div className="h-full justify-center items-center flex flex-col gap-8 w-[50vw] self-center">
               <Button
                 size="md"
                 onClick={startSession}
-                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
+                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-[50vw] text-white rounded-lg"
                 variant="shadow"
               >
                 Start Situation
               </Button>
             </div>
           ) : !isLoadingSession ? (
-            <div className="h-full justify-center items-center flex flex-col gap-8 w-[500px] self-center">
+            <div className="h-full justify-center items-center flex flex-col gap-8 w-[85vw] md:w-3/4 self-center">
               {/* <div className="flex flex-col gap-2 w-full">
                 <p className="text-sm font-medium leading-none">
                   Select an Avatar Profile
@@ -381,7 +381,7 @@ export default function InteractiveAvatar() {
                   ))}
                 </Select>
               </div> */}
-              <div className="flex flex-col gap-2 w-full">
+              <div className="flex flex-col gap-2 w-[85vw] md:w-3/4">
                 <p className="text-sm font-medium leading-none">
                   Select a Customer Situation
                 </p>
@@ -411,7 +411,7 @@ export default function InteractiveAvatar() {
               <Button
                 size="md"
                 onClick={startSession}
-                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-full text-white rounded-lg"
+                className="bg-gradient-to-tr from-blue-500 to-blue-500  w-[85vw] md:w-3/4 text-white rounded-lg"
                 variant="shadow"
               >
                 Start Situation
@@ -467,7 +467,7 @@ export default function InteractiveAvatar() {
                     <Microphone size={20} />
                   ) : (
                     <>
-                      <div className="absolute h-full w-full bg-gradient-to-tr from-red-500 to-red-500 animate-pulse -z-10"></div>
+                      <div className="absolute h-full w-[100vw] bg-gradient-to-tr from-red-500 to-red-500 animate-pulse -z-10"></div>
                       <MicrophoneStage size={20} />
                     </>
                   )}
