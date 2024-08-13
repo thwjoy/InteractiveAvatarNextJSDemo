@@ -234,7 +234,7 @@ export default function InteractiveAvatar() {
           audioChunks.current = [];
           transcribeAudio(audioBlob);
         };
-        mediaRecorder.current.start();
+        mediaRecorder.current.start(1000);
         setRecording(true);
         console.log("Recording started");
       })
