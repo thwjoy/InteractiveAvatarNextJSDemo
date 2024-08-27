@@ -10,6 +10,7 @@ export default function AboutTalentive() {
                 <p className="text-gray-700">
                 Talentive is revolutionizing employee training with AI-powered, interactive learning.
                 <br/>
+                <br/>
                 We&apos;re enhancing deskless worker training with AI, aiming for a future where training is continuous, on-the-job, and simulates your work environment before you start.
                 </p>
             </div>
@@ -18,7 +19,7 @@ export default function AboutTalentive() {
                 <img className="w-24 h-24 rounded-full mr-6" src="/konst_img.jpg" alt="Konstantin"/>
                 <div>
                     <h2 className="text-xl font-semibold mb-2">Konstantin Klingler</h2>
-                    <p className="text-gray-700">Konstantin, a Schwarzman Scholar and Forbes 30 Under 30 honoree, has venture capital and startup experience with Global Founders Capital, HodlCo, Fizz (YC S21), and Spenmo (YC S22). He successfully scaled multiple apps, including a math learning app distributed by the Austrian Ministry of Education.</p>
+                    <p className="text-gray-700">Konstantin, a Schwarzman Scholar and Forbes 30 Under 30 honoree, has VC and startup experience with Global Founders Capital, HodlCo, Fizz (YC S21), and Spenmo (YC S22). He’s scaled multiple apps, including one edtech distributed by the Austrian Ministry of Education.</p>
                 </div>
             </div>
 
