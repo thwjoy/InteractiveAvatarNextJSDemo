@@ -27,7 +27,7 @@ export default function AboutTalentive() {
                 <img className="w-24 h-24 rounded-full mr-6" src="/tom_img.jpg" alt="Tom"/>
                 <div>
                     <h2 className="text-xl font-semibold mb-2">Tom Joy</h2>
-                    <p className="text-gray-700">Tom finished his PhD in AI in 2022 from the University of Oxford; He&apos;s worked at Meta, FiveAI and co-founded GirlsWhoML - a non-profit who&apos;s mission is improve gender diveristy in AI.</p>
+                    <p className="text-gray-700">Tom finished his PhD in AI in 2022 from the University of Oxford; He&apos;s worked at Meta, FiveAI and co-founded GirlsWhoML - a non-profit who&apos;s mission is to improve gender diveristy in AI.</p>
                 </div>
             </div>
     </div>
