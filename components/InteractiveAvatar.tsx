@@ -172,7 +172,7 @@ export default function InteractiveAvatar() {
 
   async function postScore(score: number) {
     try {
-      const response = await axios.post('https://example.com/scorm/receive-score', {
+      const response = await axios.post('https://www.talentive.co.uk', {
         score: score
       });
 
