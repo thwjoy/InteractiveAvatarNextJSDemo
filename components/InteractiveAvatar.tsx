@@ -24,6 +24,7 @@ import OpenAI from "openai";
 import { useEffect, useRef, useState } from "react";
 import InteractiveAvatarTextInput from "./InteractiveAvatarTextInput";
 import { Analytics } from "@vercel/analytics/react"
+import axios from 'axios';
 
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
@@ -37,6 +38,7 @@ export default function InteractiveAvatar() {
   const [isLoadingChat, setIsLoadingChat] = useState(false);
   const [stream, setStream] = useState<MediaStream>();
   const [debug, setDebug] = useState<string>();
+  const [score, setScore] = useState<number>(0);
   const [transcript, setTranscript] = useState<string[]>([]);
   const [avatarId, setAvatarId] = useState<string>(CONTEXTS[0].avatar_id);
   const [voiceId, setVoiceId] = useState<string>(CONTEXTS[0].voice_id);
@@ -168,6 +170,18 @@ export default function InteractiveAvatar() {
       });
   }
 
+  async function postScore(score: number) {
+    try {
+      const response = await axios.post('https://example.com/scorm/receive-score', {
+        score: score
+      });
+
+      console.log('Score posted successfully:', response.data);
+    } catch (error) {
+      console.error('Error posting score:', error);
+    }
+  }
+
   async function endSession() {
     if (!initialized || !avatar.current) {
       setDebug("Avatar API not initialized");
@@ -178,6 +192,8 @@ export default function InteractiveAvatar() {
       setDebug
     );
     setStream(undefined);
+    postScore(85);
+
   }
 
   async function handleSpeak() {
