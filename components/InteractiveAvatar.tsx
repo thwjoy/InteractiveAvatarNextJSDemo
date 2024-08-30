@@ -172,15 +172,15 @@ export default function InteractiveAvatar() {
 
   async function postScore(score: number) {
     try {
-      const response = await axios.post('https://www.talentive.co.uk', {
-        score: score
-      }, {
-          headers: {
-              'Content-Type': 'application/json'
-          }
-      });
-
-      console.log('Score posted successfully:', response.data);
+      window.parent.postMessage({ score: score }, "*");
+      // const response = await axios.post('https://www.talentive.co.uk', {
+        
+      // }, {
+      //     headers: {
+      //         'Content-Type': 'application/json'
+      //     }
+      // });
+      // console.log('Score posted successfully:', response.data);
     } catch (error) {
       console.error('Error posting score:', error);
     }
