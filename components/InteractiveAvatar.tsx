@@ -21,6 +21,8 @@ import { Microphone, MicrophoneStage } from "@phosphor-icons/react";
 import { useChat } from "ai/react";
 import clsx from "clsx";
 import OpenAI from "openai";
+import { zodResponseFormat } from "openai/helpers/zod";
+import { z } from "zod";
 import { useEffect, useRef, useState } from "react";
 import InteractiveAvatarTextInput from "./InteractiveAvatarTextInput";
 import { Analytics } from "@vercel/analytics/react"
@@ -39,6 +41,7 @@ export default function InteractiveAvatar() {
   const [stream, setStream] = useState<MediaStream>();
   const [debug, setDebug] = useState<string>();
   const [score, setScore] = useState<number>(0);
+  const [feedback, setFeedback] = useState<string>('');
   const [transcript, setTranscript] = useState<string[]>([]);
   const [avatarId, setAvatarId] = useState<string>(CONTEXTS[0].avatar_id);
   const [voiceId, setVoiceId] = useState<string>(CONTEXTS[0].voice_id);
@@ -173,14 +176,8 @@ export default function InteractiveAvatar() {
   async function postScore(score: number) {
     try {
       window.parent.postMessage({ score: score }, "*");
-      // const response = await axios.post('https://www.talentive.co.uk', {
-        
-      // }, {
-      //     headers: {
-      //         'Content-Type': 'application/json'
-      //     }
-      // });
-      // console.log('Score posted successfully:', response.data);
+      window.parent.postMessage({ action: "finishCourse" }, "*");
+      // alert('Score posted successfully');
     } catch (error) {
       console.error('Error posting score:', error);
     }
@@ -196,8 +193,52 @@ export default function InteractiveAvatar() {
       setDebug
     );
     setStream(undefined);
-    postScore(85);
+  }
 
+  async function getScore(transcript: string[]) {
+
+    const transcriptScores = z.object({
+      score: z.string(),
+      feedback: z.array(z.string()),
+    });
+
+    try {
+
+          const completion = await openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: [
+              { role: 'system', content: 'You are a helpful assistant. I want you to provide a single score out of 100 on how well the server perfomed to address the client, I want you to also give tips on what they should have done better. Use JSON output with the keys "score" and "feedback"' },
+                {
+                    role: "user",
+                    content: transcript.join(';'),
+                },
+            ],
+          });
+        
+        console.log(completion.choices[0].message);
+        const chatGPTResponse = (completion.choices[0].message.content as string).replace('json', '').replace('```', '').replace('```', '');
+        console.log(chatGPTResponse);
+        try {
+            const jsonResponse = JSON.parse(chatGPTResponse);
+            console.log('Parsed JSON:', jsonResponse);
+            setScore(jsonResponse.score);
+            setFeedback(jsonResponse.feedback);
+            return jsonResponse.score;
+        } catch (error: any) {
+            console.error('Failed to parse JSON:', error.message);
+        }
+    } catch (error: any) {
+      console.error('Error calling ChatGPT API:', error.response ? error.response.data : error.message);
+    }
+
+}
+
+  async function finishCourse() {
+    setIsLoadingSession(true);
+    endSession();
+    const score = getScore(transcript);
+    postScore(await score);
+    setIsLoadingSession(false);
   }
 
   async function handleSpeak() {
@@ -338,6 +379,14 @@ export default function InteractiveAvatar() {
                 >
                   Switch Situation
                 </Button>
+                <Button
+                  size="md"
+                  onClick={finishCourse}
+                  className="bg-gradient-to-tr from-red-500 to-red-500  text-white rounded-lg"
+                  variant="shadow"
+                >
+                  Submit
+                </Button>
               </div>
             </div>
           ) : isNewSession ? (
@@ -353,64 +402,10 @@ export default function InteractiveAvatar() {
             </div>
           ) : !isLoadingSession ? (
             <div className="h-full justify-center items-center flex flex-col gap-8 w-[85vw] md:w-3/4 self-center">
-              {/* <div className="flex flex-col gap-2 w-full">
-                <p className="text-sm font-medium leading-none">
-                  Select an Avatar Profile
-                </p>
-                // <Input
-                //   value={avatarId}
-                //   onChange={(e) => setAvatarId(e.target.value)}
-                //   placeholder="Enter a custom avatar ID"
-                //
-                <Select
-                  placeholder="Avatar Profile"
-                  size="md"
-                  onChange={(e) => {
-                    setAvatarId(e.target.value);
-                  }}
-                >
-                  {AVATARS.map((avatar) => (
-                    <SelectItem
-                      key={avatar.avatar_id}
-                      textValue={avatar.avatar_id}
-                    >
-                      {avatar.name}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div>
-              <div className="flex flex-col gap-2 w-full">
-                <p className="text-sm font-medium leading-none">
-                  Select a Voice Profile
-                </p>
-                {/* <Input
-                  value={voiceId}
-                  onChange={(e) => setVoiceId(e.target.value)}
-                  placeholder="Enter a custom voice ID"
-                /> */}
-                {/* <Select
-                  placeholder="Voice Profile"
-                  size="md"
-                  onChange={(e) => {
-                    setVoiceId(e.target.value);
-                  }}
-                > */}
-                  {/* {VOICES.map((voice) => (
-                    <SelectItem key={voice.voice_id} textValue={voice.voice_id}>
-                      {voice.name} | {voice.language} | {voice.gender}
-                    </SelectItem>
-                  ))}
-                </Select>
-              </div> */}
               <div className="flex flex-col gap-2 w-[85vw] md:w-3/4">
                 <p className="text-sm font-medium leading-none">
                   Select a Customer Situation
                 </p>
-                {/* <Input
-                  value={voiceId}
-                  onChange={(e) => setVoiceId(e.target.value)}
-                  placeholder="Enter a custom voice ID"
-                /> */}
                 <Select
                   placeholder="Customer Situation"
                   size="md"
@@ -437,6 +432,14 @@ export default function InteractiveAvatar() {
               >
                 Start Situation
               </Button>
+              {/* <Button
+                  size="md"
+                  onClick={finishCourse}
+                  className="bg-gradient-to-tr from-red-500 to-red-500  text-white rounded-lg"
+                  variant="shadow"
+                >
+                  Submit
+                </Button> */}
             </div>
           ) : (
             <Spinner size="lg" color="default" />
@@ -511,6 +514,12 @@ export default function InteractiveAvatar() {
         <br />
         {debug}
       </p> */}
+      <div className="font-mono text-left">
+        <span className="font-bold">Feedback:</span>
+        <br />
+          <p>Score: {score}</p>
+          <p>Feedback: {feedback}</p>
+      </div>
       <div className="font-mono text-left">
         <span className="font-bold">Transcript:</span>
         <br />
