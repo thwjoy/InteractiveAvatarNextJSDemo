@@ -127,7 +127,7 @@ export default function InteractiveAvatar() {
           content: context?.meta_prompt,
         },
       ]);
-      setInput('Hello, how can I help you?');
+      setInput(context?.first_prompt);
       setIsInputSet(true);
       setIsNewSession(false);
     } catch (error) {
@@ -417,8 +417,8 @@ export default function InteractiveAvatar() {
                     setAvatarId(CONTEXTS[parseInt(e.target.value, 10)].avatar_id);
                   }}
                 >
-                  {CONTEXTS.map((context) => (
-                    <SelectItem key={context.context_id} textValue={context.meta_prompt}>
+                  {CONTEXTS.map((context, index) => (
+                    <SelectItem key={index} textValue={context.meta_prompt}>
                       {context.description}
                     </SelectItem>
                   ))}
